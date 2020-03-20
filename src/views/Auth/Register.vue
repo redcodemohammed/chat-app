@@ -9,6 +9,7 @@
           transition="slide-x-reverse-transition"
         >
           <v-card class="pa-3 pt-5" elevation="10">
+            <v-alert type="error" dismissible :value="error">{{errorMsg}}</v-alert>
             <v-form v-model="valid" ref="registerForm" @submit.prevent="register">
               <v-text-field outlined :rules="nameRules" name="name" label="Name" v-model="name"></v-text-field>
               <v-text-field
@@ -46,6 +47,7 @@
 </template>
 
 <script>
+import axios from "../../plugins/axios";
 export default {
   data: () => ({
     name: "",
@@ -68,14 +70,49 @@ export default {
     ],
 
     loading: false,
-    valid: false
+    valid: false,
+
+    error: false,
+    errorMsg: ""
   }),
   methods: {
-    register() {
+    async register() {
       if (this.$refs.registerForm.validate()) {
         this.loading = true;
-        // let { username, password } = this;
+        this.error = false;
+        this.errorMsg = "";
+        try {
+          //send login request:
+          let res = await axios.post("/user/register", {
+            username: this.username,
+            password: this.password,
+            name: this.name
+          });
+
+          let token = res.data.data.token;
+          this.$store.dispatch("setToken", token);
+          this.$router.push("/");
+        } catch (err) {
+          this.error = true;
+          this.errorMsg = err.response.data.message;
+        }
+
+        this.loading = false;
       }
+    }
+  },
+  watch: {
+    username() {
+      this.error = false;
+      this.errorMsg = "";
+    },
+    password() {
+      this.error = false;
+      this.errorMsg = "";
+    },
+    name() {
+      this.error = false;
+      this.errorMsg = "";
     }
   }
 };

@@ -21,6 +21,16 @@ const routes = [
     component: () => import("../views/Auth/Register.vue")
   },
   {
+    path: '/logout',
+    name: 'Logout',
+    component: () => import("../views/Auth/Logout.vue")
+  },
+  {
+    path: '/account',
+    name: 'Account',
+    component: () => import("../views/Account.vue")
+  },
+  {
     path: '*',
     name: '404',
     component: () => import("../views/404.vue")
@@ -34,12 +44,12 @@ const router = new VueRouter({
   routes
 });
 
-const auth = ["/"];
+const publicRoutes = ["/login", "/register"];
 
 router.beforeEach((to, from, next) => {
-  if (!store.getters.isLoggedIn && auth.includes(to.path)) {
+  if (!store.getters.isLoggedIn && !publicRoutes.includes(to.path)) {
     next("/login");
-  } else if (store.getters.isLoggedIn && !auth.includes(to.path)) {
+  } else if (store.getters.isLoggedIn && publicRoutes.includes(to.path)) {
     next("/");
   }
   next();
