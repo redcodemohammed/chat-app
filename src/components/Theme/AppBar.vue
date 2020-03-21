@@ -7,14 +7,6 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon class="hidden-sm-and-down">
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon class="hidden-sm-and-down">
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
       <v-menu left bottom class="hidden-sm-and-down">
         <template v-slot:activator="{ on }">
           <v-btn icon v-on="on" class="hidden-sm-and-down">
