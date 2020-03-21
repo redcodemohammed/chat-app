@@ -103,6 +103,9 @@ export default {
       this.error = false;
       this.errorMsg = "";
     }
+  },
+  deactivated() {
+    this.$destroy();
   }
 };
 </script>

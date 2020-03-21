@@ -32,6 +32,9 @@ export default {
         ? { name: "Home", to: "/" }
         : { name: "Login", to: "/login" };
     }
+  },
+  deactivated() {
+    this.$destroy();
   }
 };
 </script>

@@ -190,6 +190,9 @@ export default {
       this.error = true;
       this.errorMsg = err.response.data.message;
     }
+  },
+  deactivated() {
+    this.$destroy();
   }
 };
 </script>

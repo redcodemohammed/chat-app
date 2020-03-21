@@ -10,7 +10,9 @@
       <!-- Provides the application the proper gutter -->
       <v-container fluid>
         <!-- If using vue-router -->
+        <!-- <keep-alive> -->
         <router-view></router-view>
+        <!-- </keep-alive> -->
       </v-container>
       <!-- Floating Button here -->
     </v-content>
