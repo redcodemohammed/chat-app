@@ -1,6 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from "../store";
+import Home from "../views/Chat";
+import Login from "../views/Auth/Login";
+import Register from "../views/Auth/Register";
+import Logout from "../views/Auth/Logout";
+import Account from "../views/Account";
+import _404 from "../views/404";
 
 Vue.use(VueRouter)
 
@@ -8,37 +14,32 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import("../views/Home.vue"),
+    component: Home,
   },
   {
     path: '/login',
     name: 'Login',
-    component: () => import("../views/Auth/Login.vue")
+    component: Login
   },
   {
     path: '/register',
     name: 'Register',
-    component: () => import("../views/Auth/Register.vue")
+    component: Register
   },
   {
     path: '/logout',
     name: 'Logout',
-    component: () => import("../views/Auth/Logout.vue")
+    component: Logout
   },
   {
     path: '/account',
     name: 'Account',
-    component: () => import("../views/Account.vue")
-  },
-  {
-    path: '/chat',
-    name: 'Chat',
-    component: () => import("../views/Chat.vue")
+    component: Account
   },
   {
     path: '*',
     name: '404',
-    component: () => import("../views/404.vue")
+    component: _404
   },
 
 ];

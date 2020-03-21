@@ -30,15 +30,6 @@
               ></v-text-field>
               <v-text-field
                 outlined
-                :rules="newPasswordRules"
-                name="new password"
-                label="New password"
-                type="password"
-                v-model="password"
-                :disabled="!username && user.loading"
-              ></v-text-field>
-              <v-text-field
-                outlined
                 :rules="passwordRules"
                 name="old password"
                 label="Old password"
@@ -92,14 +83,6 @@ export default {
         "Password must contain one number at least, and be between 8 and 16 in length"
     ],
 
-    password: "",
-    newPasswordRules: [
-      v =>
-        v.length == 0 ||
-        /^(?=.*\d).{8,16}$/.test(v) ||
-        "Password must contain one number at least, and be between 8 and 16 in length"
-    ],
-
     loading: false,
     valid: false,
 
@@ -130,7 +113,6 @@ export default {
               username: this.username,
               name: this.name,
               oldPassword: this.oldPassword,
-              password: this.password
             },
             {
               headers: {
@@ -145,13 +127,13 @@ export default {
           //send login request:
           let res = await axios.post("/user/login", {
             username: this.username,
-            password: this.password
+            password: this.oldPassword
           });
 
           let token = res.data.data.token;
           this.$store.dispatch("setToken", token);
 
-          this.password = "";
+
           this.oldPassword = "";
         } catch (err) {
           this.error = true;
@@ -166,7 +148,7 @@ export default {
       this.error = false;
       this.errorMsg = "";
     },
-    password() {
+    oldPassword() {
       this.error = false;
       this.errorMsg = "";
     },

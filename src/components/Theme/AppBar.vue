@@ -61,7 +61,6 @@ export default {
         ? [
             { title: "Home", to: "/" },
             { title: "Account", to: "/account" },
-            { title: "Chat", to: "/chat" },
             { title: "Logout", to: "/logout" }
           ]
         : [
@@ -74,7 +73,6 @@ export default {
         ? [
             { title: "Home", to: "/", icon: "mdi-home" },
             { title: "Account", to: "/account", icon: "mdi-account" },
-            { title: "Chat", to: "/chat", icon: "mdi-chat" }
           ]
         : [
             { title: "Login", to: "/login", icon: "mdi-login" },
